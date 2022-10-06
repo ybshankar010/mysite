@@ -28,5 +28,9 @@ RUN chmod +x ./entrypoint.sh
 
 CMD ["./entrypoint.sh"]
 
+CMD [ "./manage.py collectstatic --noinput" ]
+
+CMD [ "./manage.py makemigrations" ]
+
 # start server  
 # ENTRYPOINT [ "gunicorn mysite.wsgi" ] 
