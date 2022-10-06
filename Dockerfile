@@ -24,7 +24,7 @@ RUN pip install -r requirements.txt
 # port where the Django app runs
 EXPOSE 8000
 
-RUN chmod +x ./docker-entrypoint.sh
+RUN chmod +x ./entrypoint.sh
 
 CMD ["./entrypoint.sh"]
 
