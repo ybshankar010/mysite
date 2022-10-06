@@ -1,7 +1,3 @@
-import email
-from email import message
-from statistics import mode
-from turtle import textinput
 from django import forms
 from .models import ContactProfile
 
