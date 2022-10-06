@@ -8,6 +8,6 @@
 ./manage.py migrate
 
 echo "Migrations are successfully completed"
-gunicorn --reload --bind 0.0.0.0:8000 mysite.wsgi:application
+#gunicorn --reload --bind 0.0.0.0:8000 mysite.wsgi:application
 
 echo "Successfully started server"
