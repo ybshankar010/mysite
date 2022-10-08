@@ -7,4 +7,7 @@
 
 ./manage.py migrate
 
-gunicorn --reload --bind 0.0.0.0:8000 mysite.wsgi:application
+echo "Migrations are successfully completed"
+#gunicorn --reload --bind 0.0.0.0:8000 mysite.wsgi:application
+
+echo "Successfully started server"

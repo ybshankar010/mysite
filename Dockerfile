@@ -1,13 +1,13 @@
 # base image  
 FROM python:3.9.7
 # setup environment variable  
-ENV DockerHOME=/webapp/  
+ENV APPDIR=/webapp/  
 
 # set work directory  
-RUN mkdir -p $DockerHOME  
+RUN mkdir -p $APPDIR  
 
 # where your code lives  
-WORKDIR $DockerHOME  
+WORKDIR $APPDIR  
 
 # set environment variables  
 ENV PYTHONDONTWRITEBYTECODE 1
@@ -18,13 +18,19 @@ ENV DISABLE_COLLECTSTATIC 1
 RUN pip install --upgrade pip  
 
 # copy whole project to your docker home directory. 
-COPY . $DockerHOME  
+COPY . $APPDIR  
 # run this command to install all dependencies  
 RUN pip install -r requirements.txt  
 # port where the Django app runs
 EXPOSE 8000
 
-CMD ["/home/docker/entrypoint.sh"]
+RUN chmod +x ./entrypoint.sh
+
+CMD ["./entrypoint.sh"]
+
+CMD [ "./manage.py collectstatic --noinput" ]
+
+CMD [ "./manage.py makemigrations" ]
 
 # start server  
-ENTRYPOINT [ "gunicorn mysite.wsgi" ] 
+# ENTRYPOINT [ "gunicorn mysite.wsgi" ] 
