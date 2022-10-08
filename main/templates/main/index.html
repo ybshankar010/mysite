@@ -69,7 +69,7 @@ Start Content
           <div class="keySkillCol">
             <h4 class="smTitle pb-3">Hobbies</h4>
             {% for sk in me.userprofile.skills.all %}
-            {% if sk.is_key_skill %}
+            {% if not sk.is_key_skill %}
             <div class="keySkillCard">
               {% if sk.image %}
               <div class="ksIconCol">
