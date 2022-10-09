@@ -9,7 +9,7 @@ class Skill(models.Model):
         verbose_name_plural = "Skills"
         verbose_name = "Skill"
 
-    name = models.CharField(max_length=20, blank=False, null=False)
+    name = models.CharField(max_length=300, blank=False, null=False)
     score = models.IntegerField(default=80, blank=True, null=True)
     image = models.FileField(blank=True, null=True, upload_to="skills")
     is_key_skill = models.BooleanField(default=False)
@@ -89,7 +89,7 @@ class Portfolio(models.Model):
     class Meta:
         verbose_name_plural = "Portfolio Profiles"
         verbose_name = "Portfolio"
-        ordering = ["name"]
+        ordering = ["-date"]
 
     date = models.DateTimeField(blank=True, null=True)
     name = models.CharField(max_length=200, blank=True, null=True)
@@ -115,9 +115,9 @@ class Blog(models.Model):
     class Meta:
         verbose_name_plural = "Blog Profiles"
         verbose_name = "Blog"
-        ordering = ["timestamp"]
+        ordering = ["-timestamp"]
 
-    timestamp = models.DateTimeField(auto_now_add=True)
+    timestamp = models.DateTimeField(blank=True, null=True)
     author = models.CharField(max_length=200, blank=True, null=True)
     name = models.CharField(max_length=200, blank=True, null=True)
     description = models.CharField(max_length=500, blank=True, null=True)
@@ -142,6 +142,7 @@ class Certificate(models.Model):
     class Meta:
         verbose_name_plural = "Certificates"
         verbose_name = "Certificate"
+        ordering = ["-date"]
 
     date = models.DateTimeField(blank=True, null=True)
     name = models.CharField(max_length=50, blank=True, null=True)
