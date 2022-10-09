@@ -42,7 +42,10 @@ Start Content
         </div>
         <div class="col-md">
           <div class="bannerContent">
-            <h1 class="xlTitle pb-3">Hi, I’m {{me.first_name|title}}, <br> a {{me.userprofile.title}} </br></h1>
+            <h1 class="xlTitle pb-3">Hi, I'm {{me.last_name|title}} {{me.first_name|title}},
+              <br>{{me.userprofile.title}}
+              </br>
+            </h1>
             <p>{{me.userprofile.bio}}</p>
             <div class="bannerBtnCol">
               <div class="row">
@@ -83,7 +86,7 @@ Start Content
           </div>
         </div>
         <div class="col-md">
-          <h4 class="smTitle pb-3">Coding Skills</h4>
+          <h4 class="smTitle pb-3">Skills</h4>
           <div class="progressCol">
             <div class="progressCard">
               {% for sk in me.userprofile.skills.all %}
@@ -92,14 +95,14 @@ Start Content
                 <span class="progressLbl">{{sk.name}}</span>
                 <div class="row g-2 align-items-center">
                   <div class="col">
-                    <div class="progress progressStyle">
+                    <!-- <div class="progress progressStyle">
                       <div class="progress-bar" role="progressbar" style="width: {{sk.score}}%"
                         aria-valuenow="{{sk.score}}" aria-valuemin="0" aria-valuemax="100"></div>
-                    </div>
+                  </div> -->
                   </div>
-                  <div class="col-auto">
+                  <!-- <div class="col-auto">
                     <span class="pLbl">{{sk.score}}%</span>
-                  </div>
+                  </div> -->
                 </div>
               </div>
               {% endif %}
@@ -170,7 +173,8 @@ Start Content
           <div class="row g-4 align-items-center">
             <div class="col-md-auto">
               <div class="portfolioImgCol">
-                <a href="{% url 'main:portfolio' slug=p.slug %}"><img src="{{p.image.url}}" alt="..."></a>
+                <a href="{% url 'main:portfolio' slug=p.slug %}"><img src="{{p.image.url}}" alt="..."
+                    style='float:right;width:100px;height:auto;'></a>
               </div>
             </div>
             <div class="col-md">
