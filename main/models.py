@@ -11,8 +11,9 @@ class Skill(models.Model):
 
     name = models.CharField(max_length=300, blank=False, null=False)
     score = models.IntegerField(default=80, blank=True, null=True)
-    image = models.FileField(blank=True, null=True, upload_to="skills")
-    is_key_skill = models.BooleanField(default=False)
+    image = models.CharField(max_length=30, blank=False, null=False)
+    description = models.CharField(max_length=300, blank=False, null=False)
+    # is_key_skill = models.BooleanField(default=False)
 
     def __str__(self) -> str:
         return self.name
@@ -27,6 +28,7 @@ class UserProfile(models.Model):
     avatar = models.ImageField(blank=True, null=True, upload_to="avatar")
     title = models.CharField(max_length=200, blank=True, null=True)
     bio = models.TextField(blank=True, null=True)
+    description = models.TextField(blank=True, null=True)
     skills = models.ManyToManyField(Skill, blank=True)
     cv = models.FileField(null=True, blank=True, upload_to="cv")
 
@@ -44,6 +46,7 @@ class ContactProfile(models.Model):
     name = models.CharField(verbose_name="Name", max_length=100)
     email = models.EmailField(verbose_name="Email")
     message = models.TextField(verbose_name="Message")
+    subject = models.TextField(verbose_name="Subject")
 
     def __str__(self) -> str:
         return self.name
@@ -92,11 +95,13 @@ class Portfolio(models.Model):
         ordering = ["-date"]
 
     date = models.DateTimeField(blank=True, null=True)
+    enddate = models.DateTimeField(blank=True, null=True)
     name = models.CharField(max_length=200, blank=True, null=True)
     description = models.CharField(max_length=500, blank=True, null=True)
     body = RichTextField(blank=True, null=True)
     image = models.ImageField(blank=True, null=True, upload_to="portfolio")
     slug = models.SlugField(null=True, blank=True)
+    url = models.URLField(blank=True, null=True)
     is_active = models.BooleanField(default=True)
 
     def save(self, *args, **kwargs):
@@ -125,6 +130,7 @@ class Blog(models.Model):
     slug = models.SlugField(null=True, blank=True)
     image = models.ImageField(blank=True, null=True, upload_to="blog")
     is_active = models.BooleanField(default=True)
+    url = models.URLField(blank=True, null=True)
 
     def save(self, *args, **kwargs):
         if not self.id:
