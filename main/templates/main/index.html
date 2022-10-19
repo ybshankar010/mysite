@@ -4,264 +4,244 @@
 <!-- ================================
 Start SEO blocks
 ================================= -->
-{% block title %}{% endblock %}
+{% block title %}Shankar Y Bhavani Portfolio{% endblock %}
 {% block decription %}{% endblock %}
 {% block keywords %}{% endblock %}
 <!-- ================================
 END SEO blocks
 ================================= -->
 
-<!-- ================================
-Start CSS blocks
-================================= -->
 {% block extend_header %}{% endblock %}
-<!-- ================================
-END CSS blocks
-================================= -->
 
-<!-- ================================
-Start script blocks
-================================= -->
 {% block extend_footer %}{% endblock %}
-<!-- ================================
-END script blocks
-================================= -->
 
 <!-- ================================
 Start Content
 ================================= -->
+
 {% block content %}
-<section>
-  <div class="bannerSection">
+<!-- ======= Hero Section ======= -->
+<div id="hero" class="home">
+
+  <div class="container">
+    <div class="hero-content">
+      <h1>I'm <span class="typed" data-typed-items="Shankar Y Bhavani, Architect, Developer, Content Generator"></span>
+      </h1>
+      <p>Architect, Developer, Content Generator</p>
+
+      <ul class="list-unstyled">
+        <li><a href="https://www.facebook.com/ybshankar010/" target="_blank"><i class="bi bi-facebook"></i></a>
+        </li>
+        <li><a href="https://twitter.com/ybs010" target="_blank"><i class="bi bi-twitter"></i></a></li>
+        <li><a href="https://www.instagram.com/ybs.010/" target="_blank"><i class="bi bi-instagram"></i></a>
+        </li>
+        <li><a href="https://www.linkedin.com/in/ybs010/" target="_blank"><i class="bi bi-linkedin"></i></a>
+        </li>
+        <li><a href="https://medium.com/@ybshankar010" target="_blank"><i class="bi bi-medium"></i></a></li>
+      </ul>
+    </div>
+  </div>
+</div><!-- End Hero -->
+
+<main id="main">
+
+  <!-- ======= About Section ======= -->
+  <div id="about" class="paddsection">
     <div class="container">
-      <div class="row g-4 g-md-3  align-items-center">
-        <div class="col-md-auto order-md-last">
-          <div class="bannerUserImg">
-            <img src="{{me.userprofile.avatar.url}}" alt="{{me.first_name|title}} {{me.last_name|title}} avatar">
+      <div class="row justify-content-between">
+
+        <div class="col-lg-4 ">
+          <div class="div-img-bg">
+            <div class="about-img">
+              <img src="{{me.userprofile.avatar.url}}" class="img-responsive" alt="me">
+            </div>
           </div>
         </div>
-        <div class="col-md">
-          <div class="bannerContent">
-            <h1 class="xlTitle pb-3">Hi, I'm {{me.last_name|title}} {{me.first_name|title}},
-              <br>{{me.userprofile.title}}
-              </br>
-            </h1>
-            <p>{{me.userprofile.bio}}</p>
-            <div class="bannerBtnCol">
-              <div class="row">
-                <div class="col-auto">
-                  <a download href="{{me.userprofile.cv.url}}" class="btn btnPrimary">Download Resume</a>
-                </div>
-                <div class="col-auto">
-                  <a href="{% url 'main:contact' %}" class="btn btnOutline">Contact</a>
-                </div>
-              </div>
+
+        <div class="col-lg-7">
+          <div class="about-descr">
+            <p class="p-heading">{{me.userprofile.bio}}</p>
+            <p class="separator">{{me.userprofile.description}}</p>
+            <br /><br />
+            <div class="col-auto">
+              <a download href="{{me.userprofile.cv.url}}" class="btn btnPrimary">Download Resume</a>
             </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
-</section>
+  </div><!-- End About Section -->
 
-<section>
-  <div class="sectionSpace pt-0">
+  <!-- ======= Services Section ======= -->
+  <div id="services">
     <div class="container">
+
+      <div class="services-slider swiper" data-aos="fade-up" data-aos-delay="100">
+        <div class="swiper-wrapper">
+          <!-- Start SKILL item -->
+          {% for sk in me.userprofile.skills.all %}
+          <div class="swiper-slide">
+            <div class="services-block">
+              <i class="{{sk.image}}"></i>
+              <span>{{sk.name}}</span>
+              <p class="separator">{{sk.description}} </p>
+            </div>
+          </div>
+          {% endfor %}
+          <!-- End SKILL item -->
+
+        </div>
+        <div class="swiper-pagination"></div>
+      </div>
+
+    </div>
+
+  </div><!-- End Services Section -->
+
+  <!-- ======= Portfolio Section ======= -->
+  <div id="portfolio" class="paddsection">
+
+    <div class="container">
+      <div class="section-title text-center">
+        <h2>My Portfolio</h2>
+      </div>
+    </div>
+
+    <div class="container">
+
       <div class="row">
-        <div class="col-md-auto">
-          <div class="keySkillCol">
-            <h4 class="smTitle pb-3">Hobbies</h4>
-            {% for sk in me.userprofile.skills.all %}
-            {% if not sk.is_key_skill %}
-            <div class="keySkillCard">
-              {% if sk.image %}
-              <div class="ksIconCol">
-                <img src="{{sk.image.url}}" alt="...">
-              </div>
-              {% endif %}
-              <span class="ksText">{{sk.name}}</span>
-            </div>
-            {% endif %}
-            {% endfor %}
-          </div>
-        </div>
-        <div class="col-md">
-          <h4 class="smTitle pb-3">Skills</h4>
-          <div class="progressCol">
-            <div class="progressCard">
-              {% for sk in me.userprofile.skills.all %}
-              {% if sk.is_key_skill %}
-              <div class="progressCol">
-                <span class="progressLbl">{{sk.name}}</span>
-                <div class="row g-2 align-items-center">
-                  <div class="col">
-                    <!-- <div class="progress progressStyle">
-                      <div class="progress-bar" role="progressbar" style="width: {{sk.score}}%"
-                        aria-valuenow="{{sk.score}}" aria-valuemin="0" aria-valuemax="100"></div>
-                  </div> -->
-                  </div>
-                  <!-- <div class="col-auto">
-                    <span class="pLbl">{{sk.score}}%</span>
-                  </div> -->
-                </div>
-              </div>
-              {% endif %}
-              {% endfor %}
-
-            </div>
-          </div>
+        <div class="col-lg-12 d-flex justify-content-center">
+          <ul id="portfolio-flters">
+            <li data-filter="*" class="filter-active">All</li>
+            <li data-filter=".filter-company">Company</li>
+            <li data-filter=".filter-github">Git hub</li>
+            <li data-filter=".filter-freelance">Freelance</li>
+          </ul>
         </div>
       </div>
-    </div>
-  </div>
-</section>
 
-<section>
-  <div class="sectionSpaceSm lightBg">
-    <div class="container">
-      <div class="row pb-3">
-        <div class="col">
-          <h4 class="smText regular">Certificates</h4>
-        </div>
-
-      </div>
-      <div class="sliderOuter">
-        <div class="swiper certificatesSlider">
-          <div class="swiper-wrapper">
-            {% for c in certificates %}
-            {% if c.is_active %}
-            <div class="swiper-slide">
-              <div class="cardStyle1">
-                <h4 class="mdTitle cs1Title">
-                  <a href="javascript:void(0)">{{c.title}}</a>
-                </h4>
-                <ul class="cardOptionCol">
-                  <li>{{c.date.date}}</li>
-                  <li>{{c.name|title}}</li>
-                </ul>
-                <p>{{c.description}}</p>
-              </div>
-            </div>
-            {% endif %}
-            {% endfor %}
-
-          </div>
-        </div>
-        <div class="cert-swiper-button-next swiper-button-next swiperBtnStyle"></div>
-        <div class="cert-swiper-button-prev swiper-button-prev swiperBtnStyle"></div>
-        <div class="swiper-pagination swiperPaginationStyle posInitial"></div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section>
-  <div class="sectionSpace">
-    <div class="container">
-      <div class="portfolioCol">
-        <div class="row pb-3">
-          <div class="col">
-            <h4 class="smText regular">Featured Work</h4>
-          </div>
-          <div class="col-auto">
-            <a href="{% url 'main:portfolios' %}" class="simpleLink">View all</a>
-          </div>
-        </div>
+      <div class="row portfolio-container">
         {% for p in portfolio %}
-        {% if p.is_active %}
-        <div class="portfolioCard">
-          <div class="row g-4 align-items-center">
-            <div class="col-md-auto">
-              <div class="portfolioImgCol">
-                <a href="{% url 'main:portfolio' slug=p.slug %}"><img src="{{p.image.url}}" alt="..."
-                    style='float:right;width:100px;height:auto;'></a>
-              </div>
-            </div>
-            <div class="col-md">
-              <div class="portfolioContentCol">
-                <h4 class="lgTitle"><a href="{% url 'main:portfolio' slug=p.slug %}">{{p.name}}</a></h4>
-                <ul class="portfolioOption">
-                  <li><span class="dateLbl">{{p.date.year}}</span></li>
-                </ul>
-                <p>{{p.description}}</p>
+        <div class="col-lg-4 col-md-6 portfolio-item filter-company">
+          <img src="{{p.image.url}}" class="img-fluid" alt="">
+          <div class="portfolio-info">
+            <h4>{{p.name}}</h4>
+            {% if p.is_active %}
+            <p>{{p.date.year}} - </p>
+            {% else %}
+            <p>{{p.date.year}} - {{p.enddate.year}}</p>
+            {% endif %}
+            <a href="{{p.image.url}}" data-gallery="portfolioGallery" class="portfolio-lightbox preview-link"><i
+                class="bx bx-plus"></i></a>
+            <a href="{% url 'main:portfolio' slug=p.slug %}" class="details-link" title="More Details"><i
+                class="bx bx-link"></i></a>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+
+  </div><!-- End Portfolio Section -->
+
+  <!-- ======= Journal Section ======= -->
+  <div id="journal" class="text-left paddsection">
+
+    <div class="container">
+      <div class="section-title text-center">
+        <h2>Blog</h2>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="journal-block">
+        <div class="row">
+          {% for b in blogs %}
+          <div class="col-lg-4 col-md-6">
+            <div class="journal-info">
+              <a href="{{b.url}}"><img src="{{b.image.url}}" class="img-responsive" alt="img"></a>
+              <div class="journal-txt">
+                <h4><a href="{{b.url}}" target="_blank">{{b.name}}</a></h4>
+                <p class="separator">{{b.description}} </p>
               </div>
             </div>
           </div>
+          {% endfor %}
         </div>
-        {% endif %}
-        {% endfor %}
-
       </div>
-      <div class="testimonialCol">
-        <h4 class="smText regular d-block">Testimonials</h4>
-        <div class="testimonialSlider">
-          <div class="swiper testimonialSwiper">
-            <div class="swiper-wrapper">
-              {% for t in testimonials %}
-              {% if t.is_active %}
-              <div class="swiper-slide">
-                <div class="testimonialCard">
-                  <div class="row align-items-center">
-                    <div class="col-sm-auto">
-                      <div class="tImgCol">
-                        <img src="{{t.thumbnail.url}}" alt="...">
-                      </div>
-                    </div>
-                    <div class="col-sm">
-                      <div class="tContentCol">
-                        <h4 class="xsTitle bold">{{t.name}} - {{t.role}}</h4>
-                        <p>{{t.quote}}</p>
-                      </div>
-                    </div>
+    </div>
+
+  </div><!-- End Journal Section -->
+
+  <!-- ======= Contact Section ======= -->
+  <div id="contact" class="paddsection">
+    <div class="container">
+      <div class="contact-block1">
+        <div class="row">
+
+          <div class="col-lg-6">
+            <div class="contact-contact">
+
+              <h2 class="mb-30">GET IN TOUCH</h2>
+
+              <ul class="contact-details">
+                <li><span>Hyderabad, Telangana</span></li>
+                <li><span>India</span></li>
+                <li><span>+91 XXXXX-XXXXX</span></li>
+                <li><span>yeleswarapushankar@gmail.com</span></li>
+              </ul>
+
+            </div>
+          </div>
+
+          <div class="col-lg-6">
+            <form method="post" role="form" class="php-email-form" action="/contact/">
+              {% csrf_token %}
+              <div class="row gy-3">
+
+                <div class="col-lg-6">
+                  <div class="form-group contact-block1">
+                    <input type="text" name="name" class="form-control" id="name" placeholder="Your Name" required>
                   </div>
                 </div>
+
+                <div class="col-lg-6">
+                  <div class="form-group">
+                    <input type="email" class="form-control" name="email" id="email" placeholder="Your Email" required>
+                  </div>
+                </div>
+
+                <div class="col-lg-12">
+                  <div class="form-group">
+                    <input type="text" class="form-control" name="subject" id="subject" placeholder="Subject" required>
+                  </div>
+                </div>
+
+                <div class="col-lg-12">
+                  <div class="form-group">
+                    <textarea class="form-control" name="message" placeholder="Message" required></textarea>
+                  </div>
+                </div>
+
+                <div class="col-lg-12">
+                  <div class="loading">Loading</div>
+                  <div class="error-message"></div>
+                  <div class="sent-message">Your message has been sent. Thank you!</div>
+                </div>
+
+                <div class="mt-0">
+                  <input type="submit" class="btn btnPrimary" value="Send message">
+                </div>
+
               </div>
-              {% endif %}
-              {% endfor %}
-
-            </div>
-            <div class="test-swiper-button-next swiper-button-next swiperBtnStyle"></div>
-            <div class="test-swiper-button-prev swiper-button-prev swiperBtnStyle"></div>
+            </form>
           </div>
-
-
         </div>
       </div>
     </div>
-  </div>
-</section>
+  </div><!-- End Contact Section -->
 
-<section>
-  <div class="sectionSpaceSm lightBg">
-    <div class="container">
-      <div class="row pb-3">
-        <div class="col">
-          <h4 class="smText regular">Recent posts</h4>
-        </div>
-        <div class="col-auto">
-          <a href="{% url 'main:blogs' %}" class="simpleLink">View all</a>
-        </div>
-      </div>
-      <div class="row g-3">
-        {% for b in blogs %}
-        {% if b.is_active %}
-        <div class="col-lg-6">
-          <div class="cardStyle1">
-            <h4 class="mdTitle cs1Title"><a href="{% url 'main:blog' slug=b.slug %}">{{b.name}}</a></h4>
-            <ul class="cardOptionCol">
-              <li>{{b.timestamp.date}}</li>
-              <li>{{b.author}}</li>
-            </ul>
-            <p>{{b.description}}</p>
-          </div>
-        </div>
-        {% endif %}
-        {% endfor %}
+</main><!-- End #main -->
 
-      </div>
-    </div>
-  </div>
-</section>
 {% endblock %}
 <!-- ================================
 End Content
