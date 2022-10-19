@@ -448,7 +448,7 @@ p {
 # Hero
 --------------------------------------------------------------*/
 #hero {
-  background: url("../img/home-bg.jpg") repeat scroll center center/cover;
+  background: url("../img/my-home-bg.jpeg") repeat scroll center top/cover;
   height: 100vh;
   width: 100%;
 }
@@ -467,7 +467,7 @@ p {
   font-weight: 700;
   margin-bottom: 10px;
   text-transform: uppercase;
-  color: #fff;
+  color: #F0FFFF;
 }
 
 .hero-content p {
@@ -476,7 +476,7 @@ p {
   margin-top: 0;
   margin-bottom: 30px;
   text-transform: capitalize;
-  color: #fff;
+  color: #F5FFFA;
   font-weight: 500;
 }
 
